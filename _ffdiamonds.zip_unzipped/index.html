@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get Diamonds</title>
+  <link rel="icon" href="assets/img/titlelogo.png" type="image/png" />
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-WRGZ5THQ');</script>
+  <!-- End Google Tag Manager -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "sogw5zzkxm");
+</script>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    body {
+      display: block;
+      background-color: #1a1a2e;
+    }
+
+    .body {
+      display: block;
+      width: 100%;
+    }
+
+    .notification-outer {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 9999;
+      text-align: center;
+    }
+
+    .notification-box {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 330px;
+      height: 310px;
+      /* overflow: hidden; */
+      border: 1px solid white;
+      z-index: 10000;
+      /* background-color: white; */
+      border-radius: 10px;
+      padding: 12px 9px 9px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Close Button */
+    .close-btn {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      left: 50%;
+      z-index: 10000;
+      transform: translate(-50%);
+      bottom: -25%;
+      background: none;
+      border: 1px solid red;
+      font-size: 32px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #f3eded;
+      display: block;
+      padding: 0px 0px 4px;
+      border-radius: 50%;
+      background-color: red;
+      animation: scaleUpDown 1.5s ease-in-out infinite;
+    }
+
+    .pb10 {
+      /* width: 360px;
+        height: 280px; */
+      margin: 0 auto;
+    }
+
+    .container {
+      display: flex;
+      width: 100%;
+      max-width: 360px;
+      margin: 0 auto;
+    }
+
+    .outer {
+      display: block;
+    }
+
+    .inner {
+      display: block;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .logo-outer {
+      display: block;
+      justify-items: center;
+      margin-bottom: 26px;
+    }
+
+    .logo {
+      width: 9rem;
+      margin: 0 auto;
+    }
+
+    .item {
+      display: flex;
+      padding-top: 2.5rem;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+      justify-content: center;
+      align-items: center;
+      padding-bottom: 0.5rem;
+    }
+
+    /* Notification Box */
+
+    /* Disable scrolling when notification is visible */
+    body.no-scroll {
+      overflow: hidden;
+    }
+
+    /*  */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      /* background-color:#1a1a2e; */
+      align-items: center;
+      justify-content: center;
+      z-index: 10010;
+      backdrop-filter: blur(6px);
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    /* Popup dialog */
+    .popup-dialog {
+      display: none;
+      background: #1a1a2e;
+      border-radius: 12px;
+      padding: 24px;
+      width: 100%;
+      max-width: 340px;
+      text-align: center;
+      animation: scaleIn 0.2s ease-out;
+    }
+
+    .popup-heading {
+      font-size: 24px;
+      font-weight: 700;
+      color: white;
+      margin-top: 0;
+      margin-bottom: 12px;
+      margin-top: 20px;
+    }
+
+    .popup-message {
+      font-size: 16px;
+      line-height: 1.5;
+      color: white;
+      /* opacity: 0.7; */
+      font-weight: 600;
+      margin: 35px 0;
+    }
+
+    .popup-button {
+      background-color: #330a92;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 18px 24px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      width: 100%;
+      max-width: 200px;
+      -webkit-tap-highlight-color: transparent;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    /*  */
+
+    .close-ad-text {
+      color: white;
+      font-size: 16px;
+      position: absolute;
+      bottom: -28%;
+      left: 0;
+      right: 0;
+      text-align: center;
+      animation: moveUpDown 0.5s ease-in-out infinite;
+    }
+
+    @keyframes moveUpDown {
+
+      0%,
+      100% {
+        bottom: -34%;
+      }
+
+      50% {
+        bottom: -33%;
+      }
+    }
+
+    @keyframes scaleUpDown {
+
+      0%,
+      100% {
+        transform: translate(-50%) scale(0.9);
+      }
+
+      50% {
+        transform: translate(-50%) scale(1.2);
+      }
+    }
+  </style>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1534116064906470"
+    crossorigin="anonymous"></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11031434318"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "AW-11031434318");
+  </script>
+</head>
+
+<body onload="demo()">
+  <!-- Notification Box -->
+  <div class="body">
+    <div class="notification-outer" id="notification-outer">
+      <div class="notification-box" id="notificationBox">
+        <button class="close-btn" id="closeButton" onclick="closeBox()">
+          x
+        </button>
+        <span class="close-ad-text"> Close Ad </span>
+        <div class="pb10" style="width: 300px; height: 280px; margin: 0 auto">
+          <script async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1534116064906470"
+            crossorigin="anonymous"></script>
+          <!-- fixed-display-crick -->
+          <ins class="adsbygoogle" style="display: inline-block; width: 300px; height: 280px"
+            data-ad-client="ca-pub-1534116064906470" data-ad-slot="4714528173"></ins>
+          <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+      </div>
+    </div>
+    <div class="outer">
+      <div class="container">
+        <div class="inner">
+          <div class="logo-outer">
+            <img alt="Logo" class="logo" src="assets/img/logo.png" />
+          </div>
+
+          <div class="pb10" style="width: 360px; height: 280px; padding: 16px 0">
+            <script async
+              src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1534116064906470"
+              crossorigin="anonymous"></script>
+            <!-- fixed-display-crick -->
+            <ins class="adsbygoogle" style="display: inline-block; width: 320px; height: 240px"
+              data-ad-client="ca-pub-1534116064906470" data-ad-slot="4714528173"></ins>
+            <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+          </div>
+          <div class="popup-overlay" id="next-outer1">
+            <div class="popup-dialog" id="nextbox1">
+              <h2 class="popup-heading">Unlock ads blocker</h2>
+              <p class="popup-message">
+                Please disable your ad blocker to support us and enjoy an
+                uninterrupted experience.
+              </p>
+              <button class="popup-button" id="UnlockButton" onclick="refreshPage()">
+                Refresh Page
+              </button>
+            </div>
+          </div>
+          <div class="item">
+            <a href='/tools'>
+              <img src="assets/img/home-btn.png" class="" />
+            </a>
+          </div>
+          <div class="item">
+            <a href='/elite'>
+              <img src="assets/img/elite-home.png" alt="" />
+            </a>
+          </div>
+          <div class="item">
+            <a href='/diamonds-coin'>
+              <img src="assets/img/coin-home.png" alt="" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="firebase-config.js"></script>
+  <script type="module">
+    import { logPageView } from "./firebase-config.js";
+    logPageView("FF Free Diamonds");
+    function close() {
+      logPageView("ads close");
+    }
+    function no() {
+      logPageView("ad blocker on");
+    }
+    function adUnlock() {
+      logPageView("ad Unlock");
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+      const button = document.getElementById("closeButton");
+      if (button) {
+        button.addEventListener("click", close);
+      } else {
+        console.log("Button not found!");
+      }
+      const button3 = document.getElementById("UnlockButton");
+      if (button3) {
+        button3.addEventListener("click", adUnlock);
+      } else {
+        console.log("Button not found!");
+      }
+      const button2 = document.getElementById("next-outer1");
+      if (button2) {
+        button2.addEventListener("load", on);
+      } else {
+        console.log("Button not found!");
+      }
+    });
+  </script>
+
+  <script>
+    // Ad blocker detection with fallback
+
+    function handleAdBlockResult(isBlocked) {
+      if (isBlocked) {
+        console.log("Ad blocker confirmed. Showing popup in 3 seconds...");
+
+        document.getElementById("next-outer1").style.display = "flex";
+        document.getElementById("nextbox1").style.display = "block";
+        document.body.classList.add("no-scroll");
+      } else {
+        console.log("No ad blocker detected. Proceeding normally.");
+      }
+    }
+
+    function demo() {
+      document.getElementById("notificationBox").style.display = "block";
+      document.getElementById("notification-outer").style.display = "block";
+      document.body.classList.add("no-scroll");
+    }
+
+    function closeBox() {
+      document.getElementById("notificationBox").style.display = "none";
+      document.getElementById("notification-outer").style.display = "none";
+      document.body.classList.remove("no-scroll");
+    }
+    function refreshPage() {
+      location.reload();
+    }
+  </script>
+</body>
+
+</html>
